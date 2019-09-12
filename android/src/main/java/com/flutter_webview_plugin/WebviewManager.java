@@ -507,4 +507,16 @@ class WebviewManager {
             webView.stopLoading();
         }
     }
+
+    void onPause(MethodCall call, MethodChannel.Result result){
+        if (webView != null){
+            webView.onPause();
+        }
+    }
+
+    void onResume(MethodCall call, MethodChannel.Result result){
+        if (webView != null){
+            webView.onResume();
+        }
+    }
 }

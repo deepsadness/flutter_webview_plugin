@@ -79,6 +79,12 @@ public class FlutterWebviewPlugin implements MethodCallHandler, PluginRegistry.A
             case "cleanCookies":
                 cleanCookies(call, result);
                 break;
+            case "pause":
+                pause(call, result);
+                break;
+             case "resume":
+                resume(call, result);
+                break;
             default:
                 result.notImplemented();
                 break;
@@ -232,6 +238,19 @@ public class FlutterWebviewPlugin implements MethodCallHandler, PluginRegistry.A
     private void hide(MethodCall call, final MethodChannel.Result result) {
         if (webViewManager != null) {
             webViewManager.hide(call, result);
+        }
+        result.success(null);
+    }
+
+    private void pause(MethodCall call, final MethodChannel.Result result) {
+        if (webViewManager != null) {
+            webViewManager.onPause(call, result);
+        }
+        result.success(null);
+    }
+    private void resume(MethodCall call, final MethodChannel.Result result) {
+        if (webViewManager != null) {
+            webViewManager.onResume(call, result);
         }
         result.success(null);
     }

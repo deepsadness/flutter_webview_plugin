@@ -259,6 +259,11 @@ class FlutterWebviewPlugin {
     };
     await _channel.invokeMethod('resize', args);
   }
+
+  // just add for android webview
+  Future<Null> pause() async => await _channel.invokeMethod('pause');
+  // just add for android webview
+  Future<Null> resume() async => await _channel.invokeMethod('resume');
 }
 
 class WebViewStateChanged {
