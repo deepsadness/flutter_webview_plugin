@@ -304,10 +304,15 @@ class WebviewManager {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
                 // H5中包含下载链接的话让外部浏览器去处理
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(url));
-                context.startActivity(intent);
+                try{
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(url));
+                    context.startActivity(intent);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
             }
         });
     }
