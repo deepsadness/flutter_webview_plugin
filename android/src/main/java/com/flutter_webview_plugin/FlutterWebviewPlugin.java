@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.view.Display;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
@@ -119,10 +117,7 @@ public class FlutterWebviewPlugin implements MethodCallHandler, PluginRegistry.A
         }
 
         FrameLayout.LayoutParams params = buildLayoutParams(call);
-
         activity.addContentView(webViewManager.webView, params);
-        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE|
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         webViewManager.openUrl(withJavascript,
                 clearCache,
@@ -151,10 +146,8 @@ public class FlutterWebviewPlugin implements MethodCallHandler, PluginRegistry.A
         Map<String, Number> rc = call.argument("rect");
         FrameLayout.LayoutParams params;
         if (rc != null) {
-            params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-//            params = new FrameLayout.LayoutParams(
-//                    dp2px(activity, rc.get("width").intValue()), dp2px(activity, rc.get("height").intValue()));
+            params = new FrameLayout.LayoutParams(
+                    dp2px(activity, rc.get("width").intValue()), dp2px(activity, rc.get("height").intValue()));
             params.setMargins(dp2px(activity, rc.get("left").intValue()), dp2px(activity, rc.get("top").intValue()),
                     0, 0);
         } else {
@@ -163,8 +156,7 @@ public class FlutterWebviewPlugin implements MethodCallHandler, PluginRegistry.A
             display.getSize(size);
             int width = size.x;
             int height = size.y;
-//            params = new FrameLayout.LayoutParams(width, height);
-            params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params = new FrameLayout.LayoutParams(width, height);
         }
 
         return params;
